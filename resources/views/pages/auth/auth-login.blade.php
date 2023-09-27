@@ -16,21 +16,26 @@
 
         <div class="card-body">
             <form method="POST"
-                action="#"
+                action="{{route('login')}}"
                 class="needs-validation"
                 novalidate="">
+                @csrf
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email"
                         type="email"
-                        class="form-control"
+                        class="form-control @error('email')
+                        is-invalid
+                        @enderror"
                         name="email"
                         tabindex="1"
                         required
                         autofocus>
+                        @error('email')
                     <div class="invalid-feedback">
-                        Please fill in your email
+                        {{$message}}
                     </div>
+                        @enderror
                 </div>
 
                 <div class="form-group">
@@ -38,7 +43,7 @@
                         <label for="password"
                             class="control-label">Password</label>
                         <div class="float-right">
-                            <a href="{{route('forgot')}}"
+                            <a href=""
                                 class="text-small">
                                 Forgot Password?
                             </a>
@@ -46,13 +51,17 @@
                     </div>
                     <input id="password"
                         type="password"
-                        class="form-control"
+                        class="form-control @error('password')
+                        is-invalid
+                        @enderror"
                         name="password"
                         tabindex="2"
                         required>
+                        @error('password')
                     <div class="invalid-feedback">
-                        please fill in your password
+                        {{$message}}
                     </div>
+                        @enderror
                 </div>
 
                 <div class="form-group">
