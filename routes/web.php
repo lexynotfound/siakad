@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('home',function(){
         return view('pages.app.dashboard-home', ['type_menu' => '']);
     })->name('home');
+
+    Route::resource('user', UserController::class);
 });
 
 /* Route::get('/login', function(){
