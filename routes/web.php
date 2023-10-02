@@ -20,11 +20,11 @@ Route::get('/', function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('home',function(){
-        return view('pages.app.dashboard-home', ['type_menu' => 'dashboard']);
+        return view('pages.app.dashboard-home', ['type_menu' => '']);
     })->name('home');
 });
 
-Route::get('/login', function(){
+/* Route::get('/login', function(){
     return view('pages.auth.auth-login');
 })->name('login');
 
@@ -38,7 +38,7 @@ Route::get('/forgot-password', function () {
 
 Route::post('/reset-password', function(){
     return view('pages.auth.auth-reset-password');
-})->name('reset-password');
+})->name('reset-password'); */
 
 // error
 Route::get('/error-403', function () {
