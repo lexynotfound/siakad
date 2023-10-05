@@ -19,8 +19,8 @@
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Posts</a></div>
-                    <div class="breadcrumb-item">All Posts</div>
+                    <div class="breadcrumb-item"><a href="#">Users</a></div>
+                    <div class="breadcrumb-item">Users List</div>
                 </div>
             </div>
             <div class="section-body">
@@ -59,7 +59,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>All Users</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
@@ -71,11 +71,12 @@
                                     </select>
                                 </div>
                                 <div class="float-right">
-                                    <form>
+                                    <form method="GET" action="{{route('user.index')}}" >
+                                        @csrf
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                placeholder="Search">
+                                                placeholder="Search" name="name">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -128,6 +129,7 @@
                                                     <div class="d-inline-block ml-1">{{$user->name}}</div>
                                                 </a>
                                             </td>
+                                            <td>{{$user->tgl_lahir}}</td>
                                             <td>Laravel 5 Tutorial: Introduction
                                                 <div class="table-links">
                                                     <a href="#">View</a>
@@ -139,10 +141,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="#">Web Developer</a>,
-                                                <a href="#">Tutorial</a>
+                                                {{$user->created_at}}
                                             </td>
-                                            <td>{{$user->tgl_lahir}}</td>
                                             <td>
                                                 <div class="badge badge-primary">Published</div>
                                             </td>
@@ -151,38 +151,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <li class="page-item disabled">
-                                                <a class="page-link"
-                                                    href="#"
-                                                    aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link"
-                                                    href="#">1</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link"
-                                                    href="#">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link"
-                                                    href="#">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link"
-                                                    href="#"
-                                                    aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                        {{$users->withQueryString()->links()}}
                                 </div>
                             </div>
                         </div>

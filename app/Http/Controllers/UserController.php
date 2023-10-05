@@ -13,12 +13,28 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //Logic Variable users search
-            $users = DB::table('users')
-            ->when([$request->input('name'), function($query, $name){
+        /* $name = $request->input('name');
+        $users = DB::table('users')
+            ->when($request->input('name'), function($query, $name){
                 return $query->where('name', 'like', '%'.$name.'%');
-            }])
-            ->select('id', 'name','email','phone','roles','address','tgl_lahir', DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
-            ->paginate(15);
+            })
+            ->select('id', 'name','email','phone','roles','address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
+            ->paginate(15); */
+
+        /* $users = DB::table('users')
+            ->when($request->input('name'), function($query, $name){
+                return $query->where('name','like','%'.$name.'%');
+            })
+            ->select('id', 'name', 'email', 'phone', 'roles', 'address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
+            ->paginate(15); */
+
+        $users = DB::table('users')
+        ->when($request->has('name'), function ($query) use ($request) {
+            return $query->where('name', 'like', '%' . $request->input('name') . '%');
+        })
+        ->select('id', 'name', 'email', 'phone', 'roles', 'address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
+        ->paginate(15);
+
         return view('pages.users.index',compact('users'));
     }
 
