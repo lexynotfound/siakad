@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,12 @@ Route::get('/', function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('home',function(){
-        return view('pages.app.dashboard-home', ['type_menu' => '']);
+        return view('pages.app.dashboard-home', ['type_menu' => 'dashboard']);
     })->name('home');
 
-    Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class);/* ->only([
+        'index', 'show'
+    ]); */
 });
 
 /* Route::get('/login', function(){

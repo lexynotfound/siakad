@@ -19,6 +19,9 @@ class UserSeeder extends Seeder
             'email' => 'raihanardila22@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'roles' => 'mahasiswa',
+            'tgl_lahir' => date('d-M-Y'),
+
         ]);
     }
 }
