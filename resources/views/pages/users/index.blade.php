@@ -14,7 +14,7 @@
             <div class="section-header">
                 <h1>New Users</h1>
                 <div class="section-header-button">
-                    <a href="features-post-create.html"
+                    <a href="{{route('user.create')}}"
                         class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
@@ -24,6 +24,12 @@
                 </div>
             </div>
             <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        @include('layouts.alert')
+                    </div>
+                </div>
+
                 <h2 class="section-title">Users</h2>
                 <p class="section-lead">
                     You can manage all users, such as editing, deleting and more.
