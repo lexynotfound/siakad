@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +24,7 @@ class UserController extends Controller
                 return $query->where('name', 'like', '%'.$name.'%');
             })
             ->select('id', 'name','email','phone','roles','address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
+            ->orderBy('created_at', 'desc')
             ->paginate(15);
 
         /* $users = DB::table('users')
@@ -48,6 +51,15 @@ class UserController extends Controller
     {
         //
         return view('pages.users.create');
+    }
+    public function edit(User $user)
+
+    /**
+     * Views a newly edit resource.
+     */
+    {
+        //
+        return view('pages.users.edit')->with('user',$user);
     }
 
 
@@ -80,16 +92,33 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        //Melakukan update dengan menggunakan Request
+
+        $validate = $request->validated(/* [
+            'name' => 'sometimes|string|max:80',
+            'email' => [
+                'sometimes',
+                'email',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'password' => 'sometimes|required',
+            'phone' => 'sometimes|string',
+            'address' => 'sometimes|string',
+            'roles' => 'sometimes|string',
+        ] */);
+        $user->update($validate);
+        return redirect()->route('user.index')->with('success', 'Update Data User '.$user->name.' Berhasil');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        //Menghapus data user
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'Deleted Data User '.$user->name.' Berhasil');
     }
 }
