@@ -1,19 +1,17 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\AttendenceSubjects;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Subject;
 use Illuminate\Database\Seeder;
 
-class SubjectSeeder extends Seeder
+class AttendenceSubjectsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
-        Subject::factory(350)->create();
+        AttendenceSubjects::factory(350)->create();
     }
 }

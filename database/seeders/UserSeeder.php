@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'roles' => 'admin',
+            'profile_image' => 'profile.png',
             'tgl_lahir' => date('2001-12-30'),
 
         ]);

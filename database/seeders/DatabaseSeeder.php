@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(300)->create();
 
-       /*  \App\Models\User::factory()->create([
+    /*  \App\Models\User::factory()->create([
             'name' => 'raihanardila',
             'email' => 'raihanardila22@gmail.com',
             'email_verified_at' => now(),
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SubjectSeeder::class,
             ScheduleSeeder::class,
+            KhsSeeder::class,
+            AttendenceSubjectsSeeder::class,
         ]);
     }
 }

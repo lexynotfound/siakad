@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('attendence_subjects', function (Blueprint $table) {
             $table->id();
-            /*
-                Membuat Sebuah Foreignkey
-             */
-             // membuat sebuah foreign key matakuliah berdasakrn tabel subject
-            $table->foreignId('subject_id')->constrained('subjects');
-            $table->string('day');
-            $table->string('date_start');
-            $table->string('date_end');
-            $table->string('room');
-            $table->string('attendance_code');
+            $table->foreignId('schedule_id')->constrained('schedules');
+            $table->foreignId('student_id')->constrained('users');
+            $table->string('attendence_code');
             $table->string('academic_year');
             $table->string('semester');
+            $table->string('pertemuan');
+            $table->string('status');
+            $table->string('keterangan')->nullable();
+            // latitued
+            $table->string('latitude');
+            // longtitude
+            $table->string('longitude');
+            //nilai
+            $table->string('nilai')->nullable();
             $table->string('created_by');
             $table->string('updated_by');
             $table->string('deleted_by')->nullable();
-
             $table->timestamps();
         });
     }
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('attendence_subjects');
     }
 };

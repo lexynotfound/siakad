@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->string('roles')->after('email')->default('mahasiswa');
+            $table->string('profile_image')->after('roles')->default('profile.png');
             $table->date('tgl_lahir')->after('roles')->nullable();
             $table->string('phone')->after('tgl_lahir')->nullable();
             $table->string('address')->after('phone')->nullable();

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'roles',
+        'profile_image',
         'phone',
         'tgl_lahir',
         'address',
