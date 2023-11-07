@@ -15,61 +15,88 @@
         </div>
 
         <div class="card-body">
-            <form method="POST">
+            <form action="{{route('register')}}" method="POST">
+                @csrf
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="frist_name">First Name</label>
+                    <div class="form-group col-12">
+                        <label for="frist_name">Nama Lengkap</label>
                         <input id="frist_name"
                             type="text"
-                            class="form-control"
-                            name="frist_name"
+                            class="form-control @error('name')
+                            is-invalid
+                            @enderror"
+                            name="name"
                             autofocus>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                     </div>
-                    <div class="form-group col-6">
+                   {{--  <div class="form-group col-6">
                         <label for="last_name">Last Name</label>
                         <input id="last_name"
                             type="text"
                             class="form-control"
                             name="last_name">
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email"
                         type="email"
-                        class="form-control"
+                        class="form-control @error('email')
+                        is-invalid
+                        @enderror"
                         name="email">
+                        @error('email')
                     <div class="invalid-feedback">
+                        {{$message}}
                     </div>
+                        @enderror
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-12">
                         <label for="password"
                             class="d-block">Password</label>
                         <input id="password"
                             type="password"
-                            class="form-control pwstrength"
+                            class="form-control pwstrength @error('password')
+                            is-invalid
+                            @enderror"
                             data-indicator="pwindicator"
                             name="password">
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         <div id="pwindicator"
                             class="pwindicator">
                             <div class="bar"></div>
                             <div class="label"></div>
                         </div>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-12">
                         <label for="password2"
                             class="d-block">Password Confirmation</label>
                         <input id="password2"
                             type="password"
-                            class="form-control"
-                            name="password-confirm">
+                            class="form-control @error('password_confirmation')
+                            is-invalid
+                            @enderror"
+                            name="password_confirmation">
+                            @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                     </div>
                 </div>
 
-                <div class="form-divider">
+                {{-- <div class="form-divider">
                     Your Home
                 </div>
                 <div class="row">
@@ -102,7 +129,7 @@
                         <input type="text"
                             class="form-control">
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
@@ -123,6 +150,9 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="text-muted mt-5 text-center">
+    Alredy have an account? <a href="{{ route('login')}}">Login</a>
     </div>
 @endsection
 

@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\AttendanceSubjectsController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\KhsController;
+use App\Http\Controllers\Api\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +20,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout',[AuthController::class,'logout'])
+    ->middleware('auth:sanctum');
+
+Route::apiResource('schedules', ScheduleController::class)
+    ->middleware('auth:sanctum');
+
+/* 
+    api route for khs with middleware auth
+ */
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::apiResource('khs',KhsController::class);
+});
+
+/* 
+    api route for attendance subjects with middleware auth
+ */
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::apiResource('attendance',AttendanceSubjectsController::class);
 });

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +16,80 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/dashboard-general-dashboard');
+/* Route::redirect('/', '/dashboard-general-dashboard'); */
+Route::get('/', function(){
+    return view('pages.auth.auth-login');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('home',function(){
+        return view('pages.app.dashboard-home', ['type_menu' => 'dashboard']);
+    })->name('home');
+
+    Route::resource('user', UserController::class);/* ->only([
+        'index', 'show'
+    ]); */
+});
+
+//resource route for subject with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::resource('subject', SubjectController::class);/* ->only([
+        'index', 'show'
+    ]); */
+});
+
+//resource route for schedules with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::resource('schedule', ScheduleController::class);/* ->only([
+        'index', 'show'
+    ]); */
+});
+
+// get route for generate qrcode with param schedule and with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::get('generate-qrcode/{schedule}', [ScheduleController::class, 'generateQrCode'])->name('generate-qrcode');
+});
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('generate-qrcode', [ScheduleController::class, 'generateQrCode'])->name('generate-qrcode');
+// });
+
+// put route for generate qrcode with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::put('generate-qrcode-update/{schedule}', [ScheduleController::class, 'generateQrCodeUpdate'])->name('generate-qrcode-update');
+});
+
+/* Route::get('/login', function(){
+    return view('pages.auth.auth-login');
+})->name('login');
+
+Route::get('/register', function(){
+    return view('pages.auth.auth-register');
+})->name('register');
+
+Route::get('/forgot-password', function () {
+    return view('pages.auth.auth-forgot-password');
+})->name('forgot-password');
+
+Route::post('/reset-password', function(){
+    return view('pages.auth.auth-reset-password');
+})->name('reset-password'); */
+
+// error
+Route::get('/error-403', function () {
+    return view('pages.error-403', ['type_menu' => 'error']);
+});
+Route::get('/error-404', function () {
+    return view('pages.error-404', ['type_menu' => 'error']);
+});
+Route::get('/error-500', function () {
+    return view('pages.error-500', ['type_menu' => 'error']);
+});
+Route::get('/error-503', function () {
+    return view('pages.error-503', ['type_menu' => 'error']);
+});
+
+/* Route::redirect('/', '/dashboard-general-dashboard');
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -191,19 +267,19 @@ Route::get('/modules-weather-icon', function () {
 });
 
 // auth
-Route::get('/auth-forgot-password', function () {
+Route::get('auth/auth-forgot-password', function () {
     return view('pages.auth-forgot-password', ['type_menu' => 'auth']);
 });
-Route::get('/auth-login', function () {
-    return view('pages.auth-login', ['type_menu' => 'auth']);
+Route::get('auth/auth-login', function () {
+    return view('pages.auth.auth-login', ['type_menu' => 'auth']);
 });
-Route::get('/auth-login2', function () {
+Route::get('auth/auth-login2', function () {
     return view('pages.auth-login2', ['type_menu' => 'auth']);
 });
-Route::get('/auth-register', function () {
+Route::get('auth/auth-register', function () {
     return view('pages.auth-register', ['type_menu' => 'auth']);
 });
-Route::get('/auth-reset-password', function () {
+Route::get('auth/auth-reset-password', function () {
     return view('pages.auth-reset-password', ['type_menu' => 'auth']);
 });
 
@@ -258,4 +334,4 @@ Route::get('/utilities-subscribe', function () {
 // credits
 Route::get('/credits', function () {
     return view('pages.credits', ['type_menu' => '']);
-});
+}); */
