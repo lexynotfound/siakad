@@ -18,6 +18,7 @@ return new class extends Migration
              */
              // membuat sebuah foreign key matakuliah berdasakrn tabel subject
             $table->foreignId('subject_id')->constrained('subjects');
+            /* $table->foreignId('student_id')->constrained('users'); */
             $table->string('day');
             $table->string('date_start');
             $table->string('date_end');

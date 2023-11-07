@@ -30,6 +30,7 @@ class UpdateUserRequest extends FormRequest
             'phone' => 'sometimes|string',
             'address' => 'sometimes|string',
             'roles' => 'sometimes|string',
+            'profile_images' => 'sometimes|string',
         ];
     }
 }

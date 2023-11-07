@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Khs extends Model
+class StudentSchedule extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'student_id',
+        'schedule_id',
+    ];
+
     //belongto
-    public function subject()
+    public function schedule()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Schedule::class);
     }
 
     public function student()

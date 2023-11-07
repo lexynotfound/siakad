@@ -31,6 +31,30 @@
 
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"
+                    data-toggle="dropdown"><i class="fas fa-fire"></i> <span>Subjects</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link"
+                            href="{{ route('subject.index') }}">Subject List</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"
+                    data-toggle="dropdown"><i class="fas fa-fire"></i> <span>Schedules</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link"
+                            href="{{ route('schedule.index') }}">Schedules Student</a>
+                    </li>
+
+                </ul>
+            </li>
             {{-- <li class="nav-item dropdown">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fas fa-map-marker-alt"></i> <span>Google

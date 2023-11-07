@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -27,6 +29,34 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('user', UserController::class);/* ->only([
         'index', 'show'
     ]); */
+});
+
+//resource route for subject with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::resource('subject', SubjectController::class);/* ->only([
+        'index', 'show'
+    ]); */
+});
+
+//resource route for schedules with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::resource('schedule', ScheduleController::class);/* ->only([
+        'index', 'show'
+    ]); */
+});
+
+// get route for generate qrcode with param schedule and with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::get('generate-qrcode/{schedule}', [ScheduleController::class, 'generateQrCode'])->name('generate-qrcode');
+});
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('generate-qrcode', [ScheduleController::class, 'generateQrCode'])->name('generate-qrcode');
+// });
+
+// put route for generate qrcode with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::put('generate-qrcode-update/{schedule}', [ScheduleController::class, 'generateQrCodeUpdate'])->name('generate-qrcode-update');
 });
 
 /* Route::get('/login', function(){

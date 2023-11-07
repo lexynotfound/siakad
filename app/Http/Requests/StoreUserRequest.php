@@ -29,6 +29,7 @@ class StoreUserRequest extends FormRequest
             'phone' => 'string',
             'address' => 'string',
             'roles' => 'string',
+            'profile_image' => 'string',
         ];
     }
 }

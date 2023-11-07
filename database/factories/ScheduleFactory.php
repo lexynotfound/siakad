@@ -19,6 +19,7 @@ class ScheduleFactory extends Factory
         return [
             //membuat sebuah data fake jadwal kuliah
             'subject_id' => \App\Models\Subject::factory(),
+            /* 'student_id' => \App\Models\User::factory(), */
             'day' => $this->faker->randomElement(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu']),
             'date_start' => $this->faker->randomElement(['07:00','08:00','09:00','10:00','11:00','12:00']),
             'date_end' => $this->faker->randomElement(['09:00','10:00','11:00','12:00','13:00','14:00']),

@@ -20,7 +20,7 @@ class KhsFactory extends Factory
             //
             'subject_id' => \App\Models\Subject::factory(),
             'student_id' => \App\Models\User::factory(),
-            'nilai' => $this->faker->randomElement(['A','B','C','D','E']),
+            'nilai' => $this->faker->randomElement(['50','40','90','55','80']),
             'grade' => $this->faker->randomElement(['A','B','C','D','E']),
             'keterangan' => $this->faker->randomElement(['Lulus','Tidak Lulus']),
             'academic_year' => $this->faker->randomElement(['2021/2022','2022/2023','2023/2024','2024/2025']),

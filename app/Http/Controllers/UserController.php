@@ -23,7 +23,7 @@ class UserController extends Controller
             ->when($request->input('name'), function($query, $name){
                 return $query->where('name', 'like', '%'.$name.'%');
             })
-            ->select('id', 'name','email','phone','roles','address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
+            ->select('id', 'name','email','phone','roles','profile_image','address', DB::raw('DATE_FORMAT(tgl_lahir,"%d %M %Y") as tgl_lahir'), DB::raw('DATE_FORMAT(created_at,"%d %M %Y") as created_at'))
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
@@ -74,6 +74,7 @@ class UserController extends Controller
             'email' =>$request['email'],
             'password' => Hash::make($request['password']),
             'roles' => $request['roles'],
+            /* 'profile_image' => $request['profile_image'], */
             'phone' => $request['phone'],
             'address' => $request['address'],
         ]);
