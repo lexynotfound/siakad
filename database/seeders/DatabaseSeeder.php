@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             KhsSeeder::class,
             AttendenceSubjectsSeeder::class,
+            ImtSeeder::class,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ImtController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -36,6 +37,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subject', SubjectController::class);/* ->only([
         'index', 'show'
     ]); */
+});
+
+//resource route for subject with middleware auth
+Route::middleware(['auth'])->group(function () {
+    Route::resource('imt', ImtController::class); // Rute resource controller untuk 'imt'
+    Route::post('imt/checkPhoneNumber', [ImtController::class, 'checkPhoneNumber'])->name('imt.checkPhoneNumber');
+
 });
 
 //resource route for schedules with middleware auth

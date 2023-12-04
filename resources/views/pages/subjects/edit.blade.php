@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="card">
-                            <form action="{{route('user.update', $user)}}" method="post">
+                            <form action="{{route('subject.update', $user)}}" method="post">
                                 @csrf
                                 @method('put')
                                 <div class="card-header">
